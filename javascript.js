@@ -33,3 +33,17 @@ $("#add-train").on("click", function (event) {
     });
 });
 
+dataRef.ref().on("child_added", function (childSnapshot) {
+    var tableName = childSnapshot.val().trainName;
+    var tableDestination = childSnapshot.val().destination;
+    var tableTrain = childSnapshot.val().firstTrain;
+    var tableFrequency = childSnapshot.val().frequency;
+
+    var newRow = $("<tr>").append(
+        $("<td>").text(trainName),
+        $("<td>").text(destination),
+        $("<td>").text(frequency)
+    )
+    $("#myTable > tbody:last-child").append(newRow)
+})
+
