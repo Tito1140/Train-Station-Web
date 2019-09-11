@@ -35,13 +35,13 @@ $("#add-train").on("click", function (event) {
 });
 
 dataRef.ref().on("child_added", function (childSnapshot) {
-    var tableName = childSnapshot.val().trainName;
-    var tableDestination = childSnapshot.val().destination;
-
-    var firstTrainNew = moment(childSnapshot.val().firstTrain, "hh:mm").subtract(1, "years");
-    var diffTime = moment().diff(moment(firstTrainNew), "minutes");
+    var trainName = childSnapshot.val().trainName;
+    var destination = childSnapshot.val().destination;
+    var firstTrain = moment(childSnapshot.val().firstTrain, "hh:mm").subtract(1, "years");
+    var diffTime = moment().diff(moment(firstTrain), "minutes");
     var remainder = diffTime % childSnapshot.val().frequency;
     var minAway = childSnapshot.val().frequency - remainder;
+    var frequency = childSnapshot.val().frequency;
     var nextTrain = moment().add(minAway, "minutes");
     nextTrain = moment(nextTrain).format("hh:mm");
 
